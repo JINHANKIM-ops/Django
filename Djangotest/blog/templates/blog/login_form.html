@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+<div class="site-content center-relative">
+    <div class="single-post-wrapper content-1070 center-relative">
+
+        <article class="center-relative">
+            <h2>로그인</h2>
+            {% load widget_tweaks %}
+            <form action="{% url 'login' %}" method="post" >
+                {% csrf_token %}
+                아이디:
+                <br>
+                <input type="text" name="username" >
+                <br>
+                비밀번호:
+                <br>
+                <input type="password" name="password" >
+                <br>
+                <input type="submit" value="로그인">
+            </form>
+        </article>
+
+    </div>
+</div>
+{% endblock %}

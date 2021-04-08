@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+        <!-- Single Content -->
+<form action="{% url 'post_update' post.id %}" method="post" enctype="multipart/form-data">
+        <div id="content" class="site-content center-relative">
+            <div class="single-post-wrapper content-1070 center-relative">
+                {% load widget_tweaks %}
+                {% csrf_token %}
+
+                <article class="center-relative">
+                        <h2>수정하기</h2>
+                        {% for field in form %}
+                            <label for="{{field.id_for_label}}">{{field.label}}</label>
+
+                            <div class="form-group">
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for e in field.errors %}
+                                        <p style="color:palevioletred;">{{ e | escape }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                    <button value='action' name='ReviewForm' type="submit">수정하기</button>
+                    <div class="clear"></div>
+                </article>
+            </div>
+        </div>
+</form>
+
+{% endblock %}

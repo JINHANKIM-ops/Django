@@ -1,0 +1,80 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+        <!-- Single Content -->
+        <div id="content" class="site-content center-relative">
+            <div class="single-post-wrapper content-1070 center-relative">
+
+                <article class="center-relative">
+                    <h1 class="entry-title">
+                        {{ post.title }}
+                    </h1>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="post-info content-660 center-relative">
+                            <div class="cat-links">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'file_down' pk=post.pk%}" download>{{ post.title_image }}</a> &nbsp;
+                                        <a href="#">
+                                            {% for c in post.category.all %}
+                                                {{ c }}
+                                                {% if not forloop.last %}
+                                                    ,
+                                                {% endif %}
+                                            {% endfor %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="entry-date published">{{ post.createDate }}</div>
+                            <a href="{% url 'post_update' post.id %}"><font size="3em">수정</font></a>
+                            <a href="{% url 'post_delete' post.id %}"><font size="3em">삭제</font></a>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+
+                    {% if post.title_image %}
+                        <div class="post-full-width">
+                            <img src="{{ post.title_image.url }} " alt="">
+                        </div>
+                    {% endif %}
+
+                    <div class="entry-content">
+                        <div class="content-wrap content-660 center-relative">
+                            {{ post.content }}
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <hr>
+                        <!-- 댓글 쓰기 -->
+                        <form action="{% url 'post_comment_write' post_pk=post.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="content">
+                            <input type="submit" value="댓글작성">
+                        </form>
+                    <br>
+                        <!-- 댓글 출력 -->
+                        <div class="post-info content-660 center-relative">
+                            <div class="cat-links">
+                                {% for comment in post.comments.all %}
+                                    <div> <font color="blue"> {{ comment.writer }} </font> &nbsp;&nbsp;
+                                        <font size="2em"> {{ comment.created }} </font>
+                                        <a href="{% url 'post_comment_update' pk=post.pk %}">수정</a>
+                                        <a href="{% url 'post_comment_delete' pk=post.pk %}">삭제</a>
+                                    </div>
+                                    <P>{{ comment.text }}</P>
+                                {% empty %}
+                                <p>No comment here yet</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                </article>
+            </div>
+        </div>
+
+{% endblock %}

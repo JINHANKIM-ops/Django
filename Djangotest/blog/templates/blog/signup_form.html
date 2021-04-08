@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+<div class="site-content center-relative">
+    <div class="single-post-wrapper content-1070 center-relative">
+
+        <article class="center-relative">
+            <h2>회원 가입</h2>
+            {% load widget_tweaks %}
+            <form action="{% url 'signup' %}" method="post">
+                {% csrf_token %}
+                아이디:
+                <br>
+                <input name="username" type="text">
+                <br>
+                닉네임:
+                <br>
+                <input name="nickname" type="text">
+                <br>
+                비밀번호:
+                <br>
+                <input name="password" type="password">
+                <br>
+                이메일:
+                <br>
+                <input name="email" type="text">
+                <br><br>
+                <input type="submit" value="가입완료">
+            </form>
+        </article>
+    </div>
+</div>
+{% endblock %}

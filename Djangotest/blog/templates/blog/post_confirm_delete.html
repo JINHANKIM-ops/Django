@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+        <!-- Single Content -->
+<form method="post" action="">
+        <div id="content" class="site-content center-relative">
+            <div class="single-post-wrapper content-1070 center-relative">
+                {% csrf_token %}
+
+                <article class="center-relative">
+                        <h2>삭제하기</h2>
+                                <div class="form-group">
+                                    <p>{{ post.title }}을 삭제할까요?</p>
+                                    <input type="submit" value="네"/>
+                                </div>
+                    <div class="clear"></div>
+                </article>
+
+            </div>
+        </div>
+</form>
+
+{% endblock %}

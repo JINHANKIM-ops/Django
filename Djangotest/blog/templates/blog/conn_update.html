@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load static %}
+
+        <!-- Single Content -->
+    <form action="" method="post" enctype="multipart/form-data">
+            <div id="content" class="site-content center-relative">
+                <div class="single-post-wrapper content-1070 center-relative">
+                    <h2>댓글 수정하기</h2>
+                    {% load widget_tweaks %}
+                    {% csrf_token %}
+
+                    <article class="center-relative">
+                            {% for field in form %}
+                                <div class="form-group">
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        {% for e in field.errors %}
+                                            <p style="color:palevioletred;">{{ e | escape }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <input type="submit" value="수정">
+                            <div class="clear"></div>
+                    </article>
+
+                </div>
+            </div>
+    </form>
+
+{% endblock %}
